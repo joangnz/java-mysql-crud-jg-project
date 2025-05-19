@@ -1,0 +1,10 @@
+com\mycompanyjga\java\mysql\crud\jg\project\model\Departamento.class
+com\mycompanyjga\java\mysql\crud\jg\project\model\Empleado.class
+com\mycompanyjga\java\mysql\crud\jg\project\Menu$KeyboardReader.class
+com\mycompanyjga\java\mysql\crud\jg\project\pool\MyDataSource.class
+com\mycompanyjga\java\mysql\crud\jg\project\JavaMysqlCrudJgProject.class
+com\mycompanyjga\java\mysql\crud\jg\dao\EmpleadoDao.class
+com\mycompanyjga\java\mysql\crud\jg\project\Menu.class
+com\mycompanyjga\java\mysql\crud\jg\dao\DepartamentoDao.class
+com\mycompanyjga\java\mysql\crud\jg\dao\DepartamentoDaoImpl.class
+com\mycompanyjga\java\mysql\crud\jg\dao\EmpleadoDaoImpl.class
