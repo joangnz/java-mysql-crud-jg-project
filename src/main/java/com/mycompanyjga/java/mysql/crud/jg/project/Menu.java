@@ -63,8 +63,6 @@ public class Menu {
     }
 
     public void menu() {
-        int opcion;
-
         System.out.println("SISTEMA DE GESTION");
         System.out.println("===============================");
         System.out.println("-> Introduzca una opcion de entre las siguientes:");
@@ -105,6 +103,7 @@ public class Menu {
                     insert(table);
                     break;
                 case 4:
+                    update(table);
                     break;
                 case 5:
                     break;
@@ -148,6 +147,7 @@ public class Menu {
                     insert(table);
                     break;
                 case 4:
+                    update(table);
                     break;
                 case 5:
                     break;
@@ -258,7 +258,14 @@ public class Menu {
     }
     
     public void delete(String table) {
-        
+        switch (table) {
+            case "empleados":
+                deleteEmpleado();
+                break;
+            case "departamentos":
+                deleteDepartamento();
+                break;
+        }
     }
     
     private void insertEmpleado() {
@@ -405,14 +412,29 @@ public class Menu {
                 
                 System.out.printf("Introduzca el nombre del empleado (%s): ", empleado.getNombre());
                 String nombre = reader.nextLine();
-                
                 nombre = (nombre.isBlank()) ? empleado.getNombre() : nombre;
                 
                 System.out.printf("Introduzca los apellidos del empleado (%s): ", empleado.getApellidos());
                 String apellidos = reader.nextLine();
-                apellidos = (apellidos.isBlank()) ? empleado.getApellidos(): apellidos;
+                apellidos = (apellidos.isBlank()) ? empleado.getApellidos() : apellidos;
                 
+                System.out.printf("Introduzca la fecha de nacimiento del empleado (%s): ", empleado.getFechaNacimiento().toString());
+                LocalDate fechaNacimiento = reader.nextLocalDate();
+                fechaNacimiento = (fechaNacimiento.toString().isBlank()) ? empleado.getFechaNacimiento() : fechaNacimiento;
                 
+                System.out.printf("Introduzca el puesto del empleado (%s): ", empleado.getPuesto());
+                String puesto = reader.nextLine();
+                puesto = (puesto.isBlank()) ? empleado.getPuesto() : puesto;
+                
+                System.out.printf("Introduzca el email del empleado (%s): ", empleado.getEmail());
+                String email = reader.nextLine();
+                email = (email.isBlank()) ? empleado.getEmail() : email;
+                
+                System.out.printf("Introduzca el ID del departamento del empleado (%s): ", empleado.getIdDepartamento());
+                int idDepartamento = reader.nextInt();
+                idDepartamento = (String.valueOf(idDepartamento).isBlank()) ? empleado.getIdDepartamento() : idDepartamento;
+                
+                empDao.update(empleado);
             }
         } catch (SQLException e) {
             System.err.println("Error consultando en la base de datos.");
@@ -440,7 +462,37 @@ public class Menu {
                 String nombre = reader.nextLine();
 
                 nombre = (nombre.isBlank()) ? departamento.getNombre() : nombre;
+                
+                depDao.update(departamento);
             }
+        } catch (SQLException e) {
+            System.err.println("Error consultando en la base de datos.");
+        }
+    }
+    
+    private void deleteEmpleado() {
+        System.out.println("\nELIMINACION DE EMPLEADO");
+        System.out.println("----------------------\n");
+        
+        try {
+            System.out.print("Introduzca el ID del empleado a eliminar: ");
+            int id = reader.nextInt();
+            
+            empDao.delete(id);
+        } catch (SQLException e) {
+            System.err.println("Error consultando en la base de datos.");
+        }
+    }
+    
+    private void deleteDepartamento() {
+        System.out.println("\nELIMINACION DE DEPARTAMENTO");
+        System.out.println("----------------------\n");
+        
+        try {
+            System.out.print("Introduzca el ID del departamento a eliminar: ");
+            int id = reader.nextInt();
+            
+            depDao.delete(id);
         } catch (SQLException e) {
             System.err.println("Error consultando en la base de datos.");
         }
